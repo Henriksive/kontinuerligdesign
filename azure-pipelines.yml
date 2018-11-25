@@ -17,10 +17,12 @@ steps:
     yarn build
   displayName: 'yarn install and build'
 
-- task: ArchiveFiles@2
+- task: ArchiveFiles@1
+  displayName: 'Archive files'
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)/build' 
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
-    replaceExistingArchive: true 
+    rootFolder: '$(Build.Repository.LocalPath)'/build
+    includeRootFolder: false
+    archiveType: zip
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
